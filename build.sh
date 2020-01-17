@@ -1,10 +1,6 @@
 #!/bin/bash
 . config.sh
 
-mkdir ./$PROJ
+mkdir docker
 $DKR build ./ -t $PROJ
-$DKR run -it --rm -v ./$PROJ:$DEST -w $DEST --privileged=true --net=host localhost/superponzu \
-ponzu new $PROJ && \
-ponzu build && \
-ponzu run --port $PORT
-# now configure your admin login etc
+$DKR run -it --rm -v ./docker:/go/src/docker --privileged=true --net=host localhost/$PROJ /bin/bash cnt_build.sh
